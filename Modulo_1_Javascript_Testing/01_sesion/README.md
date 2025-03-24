@@ -41,8 +41,7 @@ console.error(numero == numeroTexto);
 
 ## Desafíos Encontrados
 
-- **Configuración del entorno de Jest**: Tuve problemas iniciales con la configuración de Babel para usar sintaxis ES6. Lo resolví siguiendo la documentación oficial y ajustando el archivo `babel.config.js`.
-- **Testing de excepciones**: Aprendí a usar correctamente la sintaxis para verificar que una función lanza excepciones específicas.
+- **Por el momento no tuve ningun inconveniente para realizar la actividad.
 
 ## Recursos Adicionales
 
