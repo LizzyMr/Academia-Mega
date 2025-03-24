@@ -15,7 +15,7 @@
 
 ## Ejercicios Realizados
 
-### Ejercicio 1: Calculadora con Tests
+### Ejercicio 1: Bienvenido a mi aplicacion
 
 ```javascript
 // Sesion 1 - 24/03/2025
