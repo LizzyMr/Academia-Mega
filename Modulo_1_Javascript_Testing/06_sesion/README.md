@@ -1,0 +1,194 @@
+# Sesión 6: Introducción a JavaScript y Testing
+
+## Fecha: 31/03/2025
+
+## Objetivos de la Sesión
+
+- Introducción y Fundamentos de HTML
+- Práctica utilizando las etiquetas más comunes de HTML para agregar Estilos a nuestra página web. 
+- Uso de funciones y localStorage
+
+## Temas Cubiertos
+
+1. **Fundamentos de HTML**
+   - JSON y almacenamiento local
+   - Ejemplos de buenas prácticas y depuración 
+   - Fundamentos del Testing
+
+## Ejercicios Realizados
+
+### Ejercicio 6: Almacenar textos en LocalStorage.
+
+```html y css
+
+//Ejercicio 6: Almacenar textos en LocalStorage. 
+<!-- Actividad -->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width.device-width, initial-scale=1.0">
+        <title>Actividad 6</title>
+        <style>
+            body{
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                background-color: #ae95b4;
+                color: #693a74;
+                margin: 0;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            h1{
+                color: #5f316a;
+                margin-top: 20px;
+            }
+
+            textarea{
+                width: 100%;
+                max-width: 600px;
+                height: 100px;
+                padding: 10px;
+                border: 1px solid white;
+                border-radius: 10px;
+                resize: none;
+                font-size: 16px;
+            }
+
+            button{
+                background-color: #693a74;
+                color: #ccc;
+                border: #5f316a;
+                border-radius: 5px;
+                padding: 10px 15px;
+                margin: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            button:hover{
+                background-color: #4e2258;
+            }
+
+            h2{
+                margin-top: 30px;
+                color: #693a74;
+            }
+
+            ul{
+                list-style-type: none;
+                padding: 0;
+                max-width: 600px;
+                width: 100%;
+            }
+
+            li{
+                background-color: #fff;
+                margin: 5px 0;
+                padding: 10px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            li span{
+                color: #4e2258;
+                cursor: pointer;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>
+            Notas guardadas
+        </h1>
+        <textarea id="nota" placeholder="Escribe tu nota aquí..."></textarea>
+        <br>
+        <button onclick="guardarNota()">Guardar Nota</button>
+        <button onclick="borrarNotas()">Borrar Todas</button>
+        <br>
+        <h2>Lista de Notas:</h2>
+        <ul id="listaNotas">
+        </ul>
+        <script>
+            function guardarNota(){
+                const texto = document.getElementById("nota").value.trim();
+                //console.log(texto);
+                if(texto === "") return;
+
+                let notas = JSON.parse(localStorage.getItem("notas")) || [];
+                notas.push(texto);
+
+                localStorage.setItem("notas", JSON.stringify(notas));
+                document.getElementById("nota").value = "";
+                mostrarNotas();
+            }
+
+            function mostrarNotas(){
+                const lista = document.getElementById("listaNotas");
+                lista.innerHTML = "";
+                let notas = JSON.parse(localStorage.getItem("notas")) || [];
+
+                console.log(notas);
+                notas.forEach((nota, index)=>{
+                    const li = document.createElement("li");
+                    li.innerHTML = `${nota} <span onclick='borrarNota(${index})'>❌</span>`
+                    lista.appendChild(li)
+                })
+
+                try {
+                    let resultado = 10 / 0;
+                    console.log("Resultado:", resultado);
+                    throw new Error("Este es un error personalizado");
+                } catch (error) {
+                    console.error("Se ha producido un error:", error.message);
+                } finally {
+                    console.log("Este código se ejecuta siempre");
+                }
+            }
+
+            function borrarNotas(){
+                localStorage.removeItem("notas");
+                mostrarNotas();
+            }
+
+            function borrarNota(index){
+                let notas = JSON.parse(localStorage.getItem("notas"))  || [];
+                console.log(index);
+                notas.splice(index, 1);
+                localStorage.setItem("notas", JSON.stringify(notas));
+                mostrarNotas();
+            }
+
+            mostrarNotas();
+        </script>
+    </body>
+</html>
+```
+
+
+## Desafíos Encontrados
+
+- **Sin impedimentos**: Por el momento no tuve ningun inconveniente al realizar la actividad. 
+
+## Recursos Adicionales
+
+- [JavaScript Testing Best Practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
+- [ES6 Features Overview](https://github.com/lukehoban/es6features)
+
+## Próximos Pasos
+
+- Continuar los avances en cursos de prerrequisitos. 
+- Practicar los ejercicios realizados en la sesión.
+
+## Reflexiones Personales
+
+Esta sesión me ha ayudado a recordar conocimientos básicos sobre HTML y CSS, y lo funcional que es dentro de la programación.
+
+---
+
+*Entregable correspondiente a la Semana 3 del Módulo 1: JavaScript Testing*
