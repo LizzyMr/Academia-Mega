@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Clase 8 - PokeApi</title>
+        <style>
+            body{
+                background-color: rgba(155, 176, 196, 0.527);
+                padding: 20px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            #pokemon-container{
+                display: grid;
+                grid-template-columns: 200px 200px 200px 200px 200px 200px;
+                gap: 15px;
+                justify-content: center;
+            }
+            .card{
+                background-color: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .card img{
+                max-width: 100px;
+            }
+            .card h2{
+                font-size: 18px;
+                margin-top: 10px;
+                text-transform: capitalize;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="https://fontmeme.com/permalink/250404/ff33f692acfa0f9664f53c2a8011fb9d.png" alt="fuente-pokemon" border="0"></a>
+        <div id="pokemon-container"></div>
+
+        <script>
+            async function obtenerPokemones(){
+                const container = document.getElementById("pokemon-container");
+                for(let i=1; i<=60; i++){
+                    try{
+                        const respuesta = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+                        //const respuesta = await fetch(`https://rickandmortyapi.com/api/character/${i}`)
+                        console.log(respuesta);
+                        const data = await respuesta.json();
+                        console.log(data);
+
+                        const card = document.createElement("div");
+                        card.className = "card";
+                        card.innerHTML = `
+                        <img src="${data.sprites.front_default}" alt="${data.name}">
+                        <h2>${data.name}</h2>
+                        `;
+                        // card.innerHTML = `
+                        // <img src="${data.image}" alt="${data.name}">
+                        // <h2>${data.name}</h2>
+                        // `;
+                        container.appendChild(card)
+                    }catch(error){
+                        console.log("Error al obtener el Pokemon:", error);
+                    }
+                }
+            }
+            obtenerPokemones();
+        </script>
+    </body>
+</html>
