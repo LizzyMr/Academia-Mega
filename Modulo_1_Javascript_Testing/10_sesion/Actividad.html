@@ -1,0 +1,119 @@
+<!-- Actividad.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad  - Clase 10</title>
+    <style>
+        body{
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #915DA2, #5D6EA2);
+            margin: 0;
+        }
+        .login-container{
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        h1{
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        input[type="text"], input[type="password"]{
+            width: 90%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border 0.3s;
+        }
+        input[type="text"]:focus, input[type="password"]:focus{
+            border: 1px solid #6F5DA2;
+            outline: none;
+        }
+        button{
+            width: 48%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #6F5DA2;
+            color: white;
+            cursor: pointer;
+            margin: 0.5rem 0;
+        }
+        button:hover{
+            background-color: #6F5DA2;
+        }
+        .button-container{
+            display: flex;
+            justify-content: space-between;
+        }
+        .popup{
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            z-index: 1000;
+        }
+        .popup.show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login Ficticio</h1>
+        <input type="text" id="username" placeholder="Usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <div class="button-container">
+            <button onclick="login()">Iniciar Sesión</button>
+            <button onclick="logout()">Cerrar Sesión</button>
+        </div>
+    </div>
+    <div class="popup" id="notification"></div>
+    <script src="authModule.js"></script>
+    <script src="userSingleton.js"></script>
+    <script>
+        function showNotification(message){
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function login(){
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+
+            AuthModule.login(user, pass)
+            .then(response => {
+                if(response.success){
+                    showNotification("Usuario autenticado.");
+                }else{
+                    showNotification("Credenciales incorrectas.");
+                }
+            });
+        }
+        
+        function logout(){
+            const response = AuthModule.logout();
+            showNotification(response.message);
+        }
+    </script>
+</body>
+</html>
