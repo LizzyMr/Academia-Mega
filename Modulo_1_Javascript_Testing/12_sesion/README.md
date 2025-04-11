@@ -23,7 +23,7 @@
 
 ### Ejercicio 12: Plan de Pruebas: Calculadora de promedio.
 
-[Ver el Plan de Pruebas](/Plan%20de%20Pruebas.pdf)
+[Descargar el Plan de Pruebas](https://github.com/LizzyMr/Academia-Mega/blob/master/Modulo_1_Javascript_Testing/12_sesion/Plan%20de%20Pruebas.pdf)
 
 ```html
 <!-- index.html -->
