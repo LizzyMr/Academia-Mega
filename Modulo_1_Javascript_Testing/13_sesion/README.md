@@ -20,8 +20,6 @@
 
 ### Ejercicio 13: Mini Framework.
 
-[Ver el Plan de Pruebas](https://github.com/LizzyMr/Academia-Mega/blob/master/Modulo_1_Javascript_Testing/12_sesion/Plan%20de%20Pruebas.pdf)
-
 ```html
 <!-- index.html -->
 <!DOCTYPE html>
@@ -90,7 +88,7 @@ expect(usuarioValido).toEqual(usuarioInvalido);
 
 ## Próximos Pasos
 
-- Continuar los avances en cursos de prerrequisitos. 
+- Continuar los avances en cursos de JavaScript en Udemy. 
 - Practicar los ejercicios realizados en la sesión.
 
 ## Reflexiones Personales
