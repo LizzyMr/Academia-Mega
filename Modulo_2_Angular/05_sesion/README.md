@@ -14,7 +14,7 @@
    - ¿Qué es Angular?
    - Estructura de un proyecto Angular.
    - Creación de componentes.
-   - Uso de ngIf y ngFor.
+   - Uso de ngIf, ngFor, ngSwitch, ngSwitchCase, ngClass.
    - Templates y Data Binding (I II).
 
 ## Ejercicios Realizados
