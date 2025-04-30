@@ -1,0 +1,10 @@
+<div class="card">
+    <img [src]="img" alt="">
+    <div class="card-content">
+        <h3 class="card-title">{{title}}</h3>
+        <p class="card-description">{{contenido}}</p>
+        <button class="btn" (click)="mostrarAlerta()">{{botonTxt}}</button>
+        <input type="text" [(ngModel)]="nombre" placeholder="Escribe un titulo">
+        <p>{{nombre}}</p>
+    </div>
+</div>
