@@ -1,0 +1,71 @@
+<div class="container">
+    <h2>Gestor de Productos</h2>
+    <div class="categoria-buttons">
+        <button 
+            (click)="categoriaSeleccionada = 'electronica'"
+            [ngClass]="{'activo': categoriaSeleccionada === 'electronica'}">
+            Electrónica
+        </button>
+        <button 
+            (click)="categoriaSeleccionada = 'ropa'"
+            [ngClass]="{'activo': categoriaSeleccionada === 'ropa'}">
+            Ropa
+        </button>
+        <button 
+            (click)="categoriaSeleccionada = 'alimentos'"
+            [ngClass]="{'activo': categoriaSeleccionada === 'alimentos'}"> 
+            Alimentos
+        </button>
+    </div>
+
+    <div [ngSwitch] = "categoriaSeleccionada">
+        
+        <!-- Electrónica -->
+        <div *ngSwitchCase="'electronica'">
+            <h3>Productos Electrónicos</h3>
+            <ng-container *ngIf="productos.electronica.length > 0">
+                <div *ngFor="let p of productos.electronica"
+                    [ngClass]="{'agotado':!p.disponible}"
+                    [ngStyle]="{'color': p.descuento>0?'green':'black'}"
+                    class="producto"
+                    >
+                    {{p.nombre}} - ${{p.precio}}
+                    <span *ngIf="p.descuento > 0">(Descuento {{p.descuento}}%)</span>
+                    <span *ngIf="!p.descuento">- No disponible</span>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Ropa -->
+         <div *ngSwitchCase="'ropa'">
+            <h3>Productos de Ropa</h3>
+            <ng-container *ngIf="productos.ropa.length > 0">
+                <div *ngFor="let p of productos.ropa"
+                    [ngClass]="{'agotado':!p.disponible}"
+                    [ngStyle]="{'color': p.descuento>0?'green':'black'}"
+                    class="producto"
+                    >
+                    {{p.nombre}} - ${{p.precio}}
+                    <span *ngIf="p.descuento > 0">(Descuento {{p.descuento}}%)</span>
+                    <span *ngIf="!p.descuento">- No disponible</span>
+                </div>
+            </ng-container>
+         </div>
+
+        <!-- Alimentos -->
+         <div *ngSwitchCase="'alimentos'">
+            <h3>Productos de Alimentos</h3>
+            <ng-container *ngIf="productos.alimentos.length > 0">
+                <div *ngFor="let p of productos.alimentos"
+                    [ngClass]="{'agotado':!p.disponible}"
+                    [ngStyle]="{'color': p.descuento>0?'green':'black'}"
+                    class="producto"
+                    >
+                    {{p.nombre}} - ${{p.precio}}
+                    <span *ngIf="p.descuento > 0">(Descuento {{p.descuento}}%)</span>
+                    <span *ngIf="!p.descuento">- No disponible</span>
+                </div>
+            </ng-container>
+         </div>
+    </div>
+</div>

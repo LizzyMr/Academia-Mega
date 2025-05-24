@@ -1,0 +1,10 @@
+{
+  "/api/products": {
+    "target": "http://fakestoreapi.com",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/store": "/products"
+    }
+  }
+}

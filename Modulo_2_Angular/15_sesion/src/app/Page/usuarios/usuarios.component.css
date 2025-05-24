@@ -1,0 +1,18 @@
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: rgb(19, 72, 125);
+}
+
+/* Layout principal */
+.layout {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background-color: #3472b028;
+  color: #333;
+}
