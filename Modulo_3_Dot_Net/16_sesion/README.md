@@ -1,36 +1,139 @@
-# Sesión 15: Angular
+# Sesión 16: ASP.NET y C#
 
-## Fecha: 09/05/2025
+## Fecha: 02/06/2025
 
 ## Objetivos de la Sesión
 
-- Utilizando todo lo aprendido durante el curso de Angular, entregar el proyecto final.
+- Introducción a ASP.NET y C#
+
 ## Temas Cubiertos
 
 1. **Fundamentos de Angular**
-   - Introducción  a routing en Angular.
-   - Formularios en Angular.
-   - Introducción a consumo de APIs con HTTP Client.
-   - Manejo de estados con Services y Observables.
-   - Implementación de un CRUD Completo.
+   - Patrones de diseño - Introducción
+   - Patrón Singleton
+   - Patrón Factory - Method
+   - Patrón Strategy
+   - Patrón Repositorio
 
 ## Ejercicios Realizados
 
-### Ejercicio 15: Entrega de Proyecto Final.
+### Ejercicio 16: TaskManagerClient: 
 
-En el siguiente apartado se adjuntaran todos los archivos que conforman el proyecto final de este curso de Angular. 
+Program.cs
+```c#
+using TaskManagerClient.Services;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
+var builder = WebAssemblyHostingBuilder.CreateDefault(args);
+
+builder.RootComponents.Add<App>("#app");
+
+builder.Services.AddSingleton(sp =>
+{
+    var http = new HttpClient();
+    return http;
+});
+
+builder.Services.AddScoped<ITaskReader, TaskService>();
+builder.Services.AddScoped<ITaskWriter, TaskService>();
+
+
+await builder.Build().RunAsync();
+```
+
+TaskItem.cs
+```cs
+// Este nos va servir para el DTO del backend
+
+namespace TaskManagerClient.Models;
+
+public class TaskItem
+{
+    public Guid id { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string? Description { get; set; }
+    public bool IsDone { get; set; }
+}
+```
+
+ApiEndpoints.cs
+```cs
+namespace TaskManagerClient.Helpers;
+
+public static class ApiEndpoints
+{
+    public const string Base = "http://localhost:5244/api";
+    public const string Tasks = $"{Base}/Tasks";
+}
+```
+
+ITaskReader.cs
+```cs
+using TaskManagerClient.Models;
+
+namespace TaskManagerClient.Services;
+
+public interface ITaskReader
+{
+    Task<IEnumerable<TaskItem>> GetAllAsync();
+}
+```
+
+ITaskWriter.cs
+```c# 
+using TaskManagerClient.Models;
+
+namespace TaskManagerClient.Services;
+
+public interface ITaskWriter
+{
+    Task<TaskItem> AddAsync(TaskItem task);
+    Task UpdateAsync(TaskItem);
+    Task DeleteAsync(Guid id);
+
+}
+```
+
+ITaskService.cs
+```c# 
+using System.Net.Http.Json;
+using TaskManagerClient.Helpers;
+using TaskManagerClient.Models;
+
+namespace TaskManagerClient.Services;
+
+public class TaskService(HttpClient http) : ITaskReader, ITaskWriter
+{
+    public async Task<IEnumerable<TaskItem>> GetAllAsync() =>
+        await http.GetFromJsonAsync<IEnumerable<TaskItem>>(ApiEndpoints)
+            ?? Enumerable.Empty<TaskItem>();
+
+    public async Task<TaskItem> AddAsync(TaskItem, task)
+    {
+        var response = await http.PostAtJsonAsync(ApiEndpoints.Tasks, task);
+        return await response.Content - ReadFromJsonAsync<TaskItem>() ??
+            throw new InvalidOperationException("Respuesta vacía");
+    }
+
+    public Task UpdateAsync(TaskItem task) =>
+        http.PutAsJsonAsync($"ApiEndpoints.Tasks/{task.id}");
+
+    public Task DeleteAsync(Guid id) =>
+        http.DeleteAsync($"ApiEndpoints.Tasks/{id}");
+}
+```
+
+
 
 ## Desafíos Encontrados
 
-- **Sin impedimentos:** Por el momento no tuve ningún inconveniente al realizar esta actividad.  
+- **Sin Impedimentos:** Para esta actividad no tuve ningún problema. 
 
 ## Recursos Adicionales
 
-- Curso de Angular 19 - Desde cero hasta profesional
-- Angular - Formularios: curso intensivo (Angular 8+)
-- Angular PRO desde cero: El curso definitivo (Angular 8+)
-- RxJS nivel PRO
-- Curso de Angular Avanzado: MEAN, JWT, Módulos, Animaciones
+- Patrones de diseño en C# Aplicados en ASP .Net
+- Patrones de diseño de software y principios SOLID
+- Curso completo de programación C# en .Net y muchísimo más
 
 ## Próximos Pasos
 
@@ -39,8 +142,8 @@ En el siguiente apartado se adjuntaran todos los archivos que conforman el proye
 
 ## Reflexiones Personales
 
-Esta sesión me ha ayudado a recordar conocimientos básicos sobre Angular, así como de JavaScript y lo funcional que es dentro de la programación.
+Esta sesión me ha ayudado a recordar conocimientos básicos sobre C#.
 
 ---
 
-*Entregable correspondiente a la Semana 8 del Módulo 2: Angular*
+*Entregable correspondiente a la Semana 10 del Módulo 3: ASP.NET y C#*
