@@ -1,0 +1,14 @@
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\TaskManagerObserver.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\TaskManagerObserver.AssemblyInfoInputs.cache
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\TaskManagerObserver.AssemblyInfo.cs
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\TaskManagerObserver.csproj.CoreCompileInputs.cache
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\bin\Debug\net8.0\TaskManagerObserver.exe
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\bin\Debug\net8.0\TaskManagerObserver.deps.json
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\bin\Debug\net8.0\TaskManagerObserver.runtimeconfig.json
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\bin\Debug\net8.0\TaskManagerObserver.dll
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\bin\Debug\net8.0\TaskManagerObserver.pdb
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\TaskManagerObserver.dll
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\refint\TaskManagerObserver.dll
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\TaskManagerObserver.pdb
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\TaskManagerObserver.genruntimeconfig.cache
+C:\Users\lizet\Desktop\Liderly\C#\TaskManagerObserver\obj\Debug\net8.0\ref\TaskManagerObserver.dll
