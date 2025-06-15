@@ -198,7 +198,7 @@ TaskForm.razor
 
 ## Reflexiones Personales
 
-Esta sesión me ha ayudado a recordar conocimientos básicos sobre C#.
+No agregue el resto del codigo en este documento, pero tambien se ha hecho la funcionalidad del checkbox en las tareas, agregando tambien algunas notificaciones como ¡Tarea guardada exitosamente!, ademas se realizo la correcta implementacion del metodo para eliminar, asi mismo se añadio una confirmacion al eliminar.
 
 ---
 
