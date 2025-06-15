@@ -1,0 +1,39 @@
+@using TaskManagerClient.Services;
+@using TaskManagerClient.Models;
+
+@inject ITaskWriter TaskWriter 
+
+@if (showSuccess)
+{
+    <div class="alert alert-success">
+        ¡Tarea guardada exitosamente!
+    </div>
+}
+
+<br>
+<EditForm Model="task" OnValidSubmit="Save">
+    <InputText @bind-Value="task.Title" class="form-control" placeholder="Titulo"/>
+    <InputTextArea @bind-Value="task.Description" class="form-control my-2" placeholder="Descripción"/>
+    <button class="btn btn-primary">Guardar</button>
+</EditForm>
+
+@code {
+    private TaskItem task = new();
+    private bool showSuccess = false;
+
+    [Parameter] public EventCallback OnSaved { get; set; }
+
+    async Task Save()
+    {
+        await TaskWriter.AddAsync(task);
+        task = new(); // limpiar
+
+        showSuccess = true;
+        await OnSaved.InvokeAsync();
+
+        await Task.Delay(3000);
+        showSuccess = false;
+
+        StateHasChanged();
+    }
+}
