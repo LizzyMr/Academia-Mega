@@ -1,0 +1,127 @@
+﻿@page "/"
+@using TaskManagerClient.Services
+@using TaskManagerClient.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject ITaskReader TaskReader
+@inject ITaskWriter TaskWriter
+
+<h2>Tasks</h2>
+
+@if (showDeleteConfirm)
+{
+    <div class="alert alert-danger">
+        <strong>¿Estás seguro que deseas eliminar esta tarea?</strong>
+        <div class="mt-2">
+            <button class="btn btn-danger btn-sm me-2" @onclick="ConfirmDelete">Sí</button>
+            <button class="btn btn-outline-secondary btn-sm" @onclick="CancelDelete">Cancelar</button>
+        </div>
+    </div>
+}
+
+@if (tasks is null)
+{
+    <p><em>Cargando...</em></p>
+}
+else 
+{
+    <ul class="list-group">
+        @foreach (var t in tasks)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    <input type="checkbox" checked="@t.IsDone" @onchange="@(() => ToggleDone(t))" class="form-check-input me-2" />
+                    @t.Title
+                </span>
+                <span>
+                    <button class="btn btn-sm btn-warning me-2" @onclick="() => Edit(t)">Editar</button>
+                    <button class="btn btn-sm btn-danger" @onclick="() => PromptDelete(t.id)">Eliminar</button>
+                </span>
+            </li>
+        }
+    </ul>
+
+    <hr />
+
+    @if (editingTask is not null)
+    {
+        <h4>Editar tarea</h4>
+        <EditForm Model="editingTask" OnValidSubmit="Save">
+            <InputText @bind-Value="editingTask.Title" class="form-control mb-2" placeholder="Título" />
+            <InputTextArea @bind-Value="editingTask.Description" class="form-control mb-2" placeholder="Descripción" />
+            <button class="btn btn-primary me-2" type="submit">Guardar</button>
+            <button class="btn btn-outline-secondary" type="button" @onclick="CancelEdit">Cancelar</button>
+        </EditForm>
+    }
+    else
+    {
+        <TaskForm OnSaved="Refresh" />
+    }
+}
+
+@code {
+    List<TaskItem>? tasks;
+    TaskItem? editingTask;
+
+    // Nuevas variables para eliminar con confirmación
+    bool showDeleteConfirm = false;
+    Guid taskIdToDelete;
+
+    protected override async Task OnInitializedAsync() => await Refresh();
+
+    async Task Refresh()
+    {
+        tasks = (await TaskReader.GetAllAsync()).ToList();
+        editingTask = null;
+    }
+
+    void PromptDelete(Guid id)
+    {
+        taskIdToDelete = id;
+        showDeleteConfirm = true;
+    }
+
+    async Task ConfirmDelete()
+    {
+        await TaskWriter.DeleteAsync(taskIdToDelete);
+        showDeleteConfirm = false;
+        await Refresh();
+    }
+
+    void CancelDelete()
+    {
+        showDeleteConfirm = false;
+        taskIdToDelete = Guid.Empty;
+    }
+
+    async Task ToggleDone(TaskItem task)
+    {
+        task.IsDone = !task.IsDone;
+        await TaskWriter.UpdateAsync(task);
+    }
+
+    void Edit(TaskItem task)
+    {
+        editingTask = new TaskItem
+        {
+            id = task.id,
+            Title = task.Title,
+            Description = task.Description,
+            IsDone = task.IsDone
+        };
+    }
+
+    async Task Save()
+    {
+        if (editingTask != null)
+        {
+            await TaskWriter.UpdateAsync(editingTask);
+        }
+        await Refresh();
+    }
+
+    void CancelEdit()
+    {
+        editingTask = null;
+    }
+}
