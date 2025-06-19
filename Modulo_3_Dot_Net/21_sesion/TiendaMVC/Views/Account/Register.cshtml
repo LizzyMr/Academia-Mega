@@ -1,0 +1,29 @@
+@model User
+
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<h2>Registro</h2>
+
+<form asp-action="Register" method="post">
+    <div>
+        <div>
+            <label>Usuario</label>
+            <input asp-for="Username" />
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div>
+            <label>Contraseña</label>
+            <input asp-for="Password" type="password" />
+            <span asp.validation-for="Password"></span>
+        </div>
+        <button type="submit">Crear Cuenta</button>
+    </div>
+</form>
+
+<p class="register-link">¿Ya tienes una cuenta? <a asp-action="Login">Inicia Sesión</a></p>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
