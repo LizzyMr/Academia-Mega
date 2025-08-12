@@ -1,0 +1,42 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: my-mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - net-backend-mongo
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    env_file:
+      - ./backend/src/.env
+    depends_on:
+      - mongodb
+    networks:
+      - net-backend-mongo
+      - net-backend-frontend
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frotend
+    depends_on:
+      - backend
+    networks:
+      - net-backend-frontend
+
+volumes:
+  mongo-data:
+
+networks:
+  net-backend-frontend:
+    driver: bridge
+  net-backend-mongo:
+    driver: bridge
