@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    #container_name: pgdb
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: miBaseDatos
+      POSTGRES_USER: lizzymr
+      POSTGRES_PASSWORD: Pass1234*
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  pgdata:
+
