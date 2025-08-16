@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: echo-myapp
+          image: busybox:1.37
+          command:
+          - sh
+          - -c
+          - |
+            while true; do 
+              echo -e "HTTP/1.1 200 OK\n\n$(hostname)" | nc -lk -p 8080 -q 0;
+            done
+          ports:
+          - containerPort:  8080
